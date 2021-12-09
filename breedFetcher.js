@@ -1,7 +1,26 @@
 const request = require('request');
-request('https://api.thecatapi.com/v1/breeds/search?q=sib', function(error, response, body) {
-  console.error('error:', error); // Print the error if one occurred
-  console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-  const data = JSON.parse(body);
-  console.log(data[0].description);
-});
+
+
+const fetchBreedDescription = function (breedName, callback) {
+
+
+  request(`https://api.thecatapi.com/v1/breeds/search?q=${breedName}`, function (error, response, body) {
+
+    if (error) {//error fromt he request call
+      return callback(error, null);
+    }
+
+    const data = JSON.parse(body);
+    if (data) {// check if we recieve any data 
+      return callback(null, data[0].description);
+    } else {
+      return callback('No description for this cat breed', null);
+    }
+
+  });
+
+};
+
+module.exports = {
+  fetchBreedDescription,
+}
