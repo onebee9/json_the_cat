@@ -15,4 +15,13 @@ describe('fetchBreedDescription', () => {
       done();
     });
   });
+
+  it('returns an error, invalid/non-existent breed, via callback', (done) => {
+    fetchBreedDescription('Siberian', (err, desc) => {
+      // we expect an error for this scenario, so description is null
+      assert.equal(desc, null);
+
+      done();
+    });
+  });
 });

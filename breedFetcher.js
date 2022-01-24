@@ -6,7 +6,7 @@ const fetchBreedDescription = function (breedName, callback) {
 
   request(`https://api.thecatapi.com/v1/breeds/search?q=${breedName}`, function (error, response, body) {
 
-    if (error) {//error fromt he request call
+    if (error) {//error from the request call
       return callback(error, null);
     }
 
